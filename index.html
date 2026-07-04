@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>51st Colombo Scout Troop</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen">
+
+  <header class="bg-green-700 text-white p-5 shadow-md text-center">
+    <h1 class="text-2xl font-bold tracking-wide">51st COLOMBO SCOUT PORTAL</h1>
+    <p class="text-xs text-green-200 mt-1">Simple Free Management App</p>
+  </header>
+
+  <div class="flex justify-center bg-white border-b border-gray-200 sticky top-0 shadow-sm z-10">
+    <button onclick="switchTab('members')" id="tab-members" class="flex-1 max-w-[200px] py-4 text-center font-semibold text-sm transition-all border-b-4 border-green-600 text-green-700 bg-green-50">
+      👥 Members
+    </button>
+    <button onclick="switchTab('badges')" id="tab-badges" class="flex-1 max-w-[200px] py-4 text-center font-semibold text-sm transition-all border-b-4 border-transparent text-gray-500 hover:text-gray-700">
+      🏅 Badges
+    </button>
+    <button onclick="switchTab('money')" id="tab-money" class="flex-1 max-w-[200px] py-4 text-center font-semibold text-sm transition-all border-b-4 border-transparent text-gray-500 hover:text-gray-700">
+      💵 Money Book
+    </button>
+  </div>
+
+  <main class="max-w-4xl mx-auto p-6">
+    
+    <div id="content-members" class="space-y-6">
+      <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+        <h2 class="text-lg font-bold text-gray-700 mb-3">👥 Active Scout Roster</h2>
+        <div class="divide-y divide-gray-100">
+          <div class="py-3 flex justify-between items-center">
+            <div>
+              <p class="font-semibold text-gray-800">Kamal Perera</p>
+              <p class="text-xs text-gray-500">Gold Cord</p>
+            </div>
+            <span class="bg-green-100 text-green-800 text-xs px-2.5 py-1 rounded-full font-bold">Eagle Patrol</span>
+          </div>
+          <div class="py-3 flex justify-between items-center">
+            <div>
+              <p class="font-semibold text-gray-800">Nimal Silva</p>
+              <p class="text-xs text-gray-500">Tenderfoot</p>
+            </div>
+            <span class="bg-green-100 text-green-800 text-xs px-2.5 py-1 rounded-full font-bold">Lion Patrol</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content-badges" class="hidden bg-white p-6 rounded-xl border border-gray-200 shadow-sm text-center py-12">
+      <span class="text-4xl">⛺</span>
+      <h2 className="text-xl font-bold text-gray-700 mt-2">Proficiency Badge Hub</h2>
+      <p class="text-gray-500 max-w-sm mx-auto text-sm mt-1">This section tracks completed scouting badges.</p>
+      <div class="mt-6 inline-flex gap-2 flex-wrap justify-center">
+        <span class="bg-amber-100 text-amber-800 text-xs p-2 rounded font-bold">🚑 First Aid</span>
+        <span class="bg-amber-100 text-amber-800 text-xs p-2 rounded font-bold">🔥 Campcraft</span>
+      </div>
+    </div>
+
+    <div id="content-money" class="hidden space-y-6">
+      <div class="bg-white p-5 rounded-xl border border-gray-200 shadow-sm">
+        <h2 class="text-lg font-bold text-gray-700 mb-3">📊 Financial Logs</h2>
+        <div class="divide-y divide-gray-100">
+          <div class="py-3 flex justify-between items-center">
+            <p class="text-gray-700 font-medium">Bought camping ropes</p>
+            <p class="text-red-600 font-bold">-Rs. 1,500</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    function switchTab(tabName) {
+      // Hide all contents
+      document.getElementById('content-members').classList.add('hidden');
+      document.getElementById('content-badges').classList.add('hidden');
+      document.getElementById('content-money').classList.add('hidden');
+      
+      // Reset all tab styling
+      ['members', 'badges', 'money'].forEach(t => {
+        const btn = document.getElementById('tab-' + t);
+        btn.classList.remove('border-green-600', 'text-green-700', 'bg-green-50');
+        btn.classList.add('border-transparent', 'text-gray-500');
+      });
+
+      // Show selected content
+      document.getElementById('content-' + tabName).classList.remove('hidden');
+      
+      // Highlight selected tab button
+      const activeBtn = document.getElementById('tab-' + tabName);
+      activeBtn.classList.add('border-green-600', 'text-green-700', 'bg-green-50');
+      activeBtn.classList.remove('border-transparent', 'text-gray-500');
+    }
+  </script>
+</body>
+      </html>
