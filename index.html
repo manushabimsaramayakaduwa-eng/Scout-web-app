@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>51st Colombo Scout Troop - Management Platform</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col md:flex-row antialiased selection:bg-green-500/30">
+
+  <aside class="w-full md:w-64 bg-slate-900 border-b md:border-b-0 md:border-r border-slate-800 flex flex-col justify-between shrink-0">
+    <div>
+      <div class="p-6 border-b border-slate-800 bg-slate-950/40">
+        <h1 class="text-md font-black tracking-wider text-green-400">51st COLOMBO SCOUT TROOP</h1>
+        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">Management Platform</p>
+      </div>
+      
+      <nav class="p-4 space-y-1">
+        <button onclick="switchTab('members')" id="tab-members" class="w-full text-left py-2.5 px-3.5 rounded-lg font-medium text-sm transition-all flex items-center justify-between bg-green-600 text-white shadow-md shadow-green-900/20">
+          <span class="flex items-center gap-3"><span>👥</span> Members</span>
+          <span class="text-[10px] bg-green-800 text-green-200 px-1.5 py-0.5 rounded font-bold">Active</span>
+        </button>
+        <button onclick="switchTab('patrols')" id="tab-patrols" class="w-full text-left py-2.5 px-3.5 rounded-lg font-medium text-sm transition-all flex items-center gap-3 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+          <span>⛺</span> Patrols
+        </button>
+        <button onclick="switchTab('attendance')" id="tab-attendance" class="w-full text-left py-2.5 px-3.5 rounded-lg font-medium text-sm transition-all flex items-center gap-3 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+          <span>📋</span> Attendance Page
+        </button>
+        <button onclick="switchTab('badges')" id="tab-badges" class="w-full text-left py-2.5 px-3.5 rounded-lg font-medium text-sm transition-all flex items-center gap-3 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+          <span>🏅</span> Badges
+        </button>
+        <button onclick="switchTab('awards')" id="tab-awards" class="w-full text-left py-2.5 px-3.5 rounded-lg font-medium text-sm transition-all flex items-center gap-3 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+          <span>🏆</span> Awards
+        </button>
+        <button onclick="switchTab('money-book')" id="tab-money-book" class="w-full text-left py-2.5 px-3.5 rounded-lg font-medium text-sm transition-all flex items-center gap-3 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+          <span>📖</span> Money Book
+        </button>
+        <button onclick="switchTab('library')" id="tab-library" class="w-full text-left py-2.5 px-3.5 rounded-lg font-medium text-sm transition-all flex items-center gap-3 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+          <span>📚</span> E Library
+        </button>
+        <button onclick="switchTab('albums')" id="tab-albums" class="w-full text-left py-2.5 px-3.5 rounded-lg font-medium text-sm transition-all flex items-center gap-3 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+          <span>🖼️</span> Albums
+        </button>
+        <button onclick="switchTab('about')" id="tab-about" class="w-full text-left py-2.5 px-3.5 rounded-lg font-medium text-sm transition-all flex items-center gap-3 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200">
+          <span>ℹ️</span> About
+        </button>
+      </nav>
+    </div>
+
+    <div class="p-4 border-t border-slate-800 bg-slate-950/30 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-green-700 to-emerald-500 flex items-center justify-center text-xs font-black text-white shadow-sm shadow-green-500/20">51</div>
+        <div>
+          <p class="text-xs font-bold text-slate-200">Troop Leader</p>
+          <p class="text-[10px] text-slate-500">Authorized Session</p>
+        </div>
+      </div>
+      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+    </div>
+  </aside>
+
+  <main class="flex-1 overflow-y-auto p-6 md:p-8 bg-slate-950">
+    
+    <header class="mb-8 border-b border-slate-800/80 pb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div>
+        <div class="text-xs font-bold text-green-400 tracking-wider uppercase mb-1">51st Colombo Portal</div>
+        <h2 id="page-title" class="text-2xl md:text-3xl font-extrabold tracking-tight text-white">Members Directory</h2>
+        <p id="page-description" class="text-sm text-slate-400 mt-1">An all-in-one management platform for Scout Troops to track member progress, handle finances, and manage events.</p>
+      </div>
+    </header>
+
+    <div id="display-container" class="space-y-6">
+      
+      <div id="view-members" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl flex justify-between items-center hover:border-slate-700 transition">
+            <div>
+              <h3 class="font-bold text-white">Kamal Perera</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Rank Status: <span class="text-green-400">Gold Cord</span></p>
+            </div>
+            <span class="text-[11px] font-bold tracking-wider uppercase bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Eagle Patrol</span>
+          </div>
+          <div class="bg-slate-900 border border-slate-800 p-5 rounded-xl flex justify-between items-center hover:border-slate-700 transition">
+            <div>
+              <h3 class="font-bold text-white">Nimal Silva</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Rank Status: <span class="text-slate-400">Tenderfoot</span></p>
+            </div>
+            <span class="text-[11px] font-bold tracking-wider uppercase bg-slate-800 text-slate-300 px-2.5 py-1 rounded border border-slate-700">Lion Patrol</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="view-patrols" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl text-center">
+          <div class="text-2xl mb-2">🦅</div>
+          <h3 class="font-bold text-white text-lg">Eagle Patrol</h3>
+          <p class="text-xs text-slate-500 mt-1">6 Active Scouts</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl text-center">
+          <div class="text-2xl mb-2">🦁</div>
+          <h3 class="font-bold text-white text-lg">Lion Patrol</h3>
+          <p class="text-xs text-slate-500 mt-1">8 Active Scouts</p>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-xl text-center">
+          <div class="text-2xl mb-2">🦚</div>
+          <h3 class="font-bold text-white text-lg">Peacock Patrol</h3>
+          <p class="text-xs text-slate-500 mt-1">5 Active Scouts</p>
+        </div>
+      </div>
+
+      <div id="view-attendance" class="hidden bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        <div class="p-4 bg-slate-950/40 border-b border-slate-800 text-xs font-bold uppercase text-slate-400 tracking-wider">Weekly Parade Attendance Ledger</div>
+        <div class="divide-y divide-slate-800">
+          <div class="p-4 flex justify-between items-center">
+            <span class="font-medium text-sm text-slate-200">Regular Troop Meeting - July Session</span>
+            <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded border border-emerald-500/20 font-bold">Completed</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="view-badges" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl flex items-center gap-4">
+          <div class="w-12 h-12 bg-amber-500/10 rounded-lg flex items-center justify-center text-xl text-amber-400">🚑</div>
+          <div>
+            <h4 class="font-bold text-white text-sm">First Aid Badge</h4>
+            <p class="text-xs text-slate-500 mt-0.5">Public Safety Requirement</p>
+          </div>
+        </div>
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl flex items-center gap-4">
+          <div class="w-12 h-12 bg-amber-500/10 rounded-lg flex items-center justify-center text-xl text-amber-400">⛺</div>
+          <div>
+            <h4 class="font-bold text-white text-sm">Campcraft Certification</h4>
+            <p class="text-xs text-slate-500 mt-0.5">Pioneering & Wilderness Survival</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="view-awards" class="hidden bg-slate-900 border border-slate-800 p-8 rounded-xl text-center max-w-md mx-auto">
+        <div class="text-3xl mb-3">🏆</div>
+        <h3 class="font-bold text-white text-lg">Troop Merit Awards</h3>
+        <p class="text-xs text-slate-400 mt-1">Special distinction standards like the President's Award tracking roster registry logs.</p>
+      </div>
+
+      <div id="view-money-book" class="hidden bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        <div class="p-4 bg-slate-950/40 border-b border-slate-800 text-xs font-bold uppercase text-slate-400 tracking-wider">Account Statements Ledger</div>
+        <div class="divide-y divide-slate-800">
+          <div class="p-4 flex justify-between items-center">
+            <div>
+              <p class="text-sm font-medium text-slate-200">Purchased pioneering camp equipment</p>
+              <p class="text-[10px] text-slate-500 mt-0.5">July 04, 2026</p>
+            </div>
+            <span class="text-red-400 font-bold text-sm">-Rs. 1,500</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="view-library" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl flex justify-between items-center">
+          <div>
+            <h4 class="font-bold text-sm text-white">Scout Guidebook Manual</h4>
+            <p class="text-xs text-slate-500 mt-0.5">PDF Format Documentation</p>
+          </div>
+          <button class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1.5 rounded font-bold transition">Get PDF</button>
+        </div>
+      </div>
+
+      <div id="view-albums" class="hidden grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden group hover:border-slate-700 transition">
+          <div class="h-36 bg-slate-800 flex items-center justify-center text-slate-600 text-xl font-bold">🖼️</div>
+          <div class="p-3 text-xs font-bold text-slate-300 bg-slate-950/50">Annual Campout Registry</div>
+        </div>
+      </div>
+
+      <div id="view-about" class="hidden bg-slate-900 border border-slate-800 p-6 rounded-xl max-w-xl">
+        <h3 class="font-bold text-white text-lg mb-2">Our Foundation</h3>
+        <p class="text-sm text-slate-400 leading-relaxed">The 51st Colombo Scout Troop provides high-fidelity character progression tracking loops, survival preparation events, and group team coordination platforms.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // Exact mapping definitions for Header details
+    const metaData = {
+      'members': { title: 'Members Directory', desc: 'An all-in-one management platform for Scout Troops to track member progress, handle finances, and manage events.' },
+      'patrols': { title: 'Troop Patrols Framework', desc: 'Overview of organized troop structural patrols and internal student assignments.' },
+      'attendance': { title: 'Attendance Page Logs', desc: 'Historical parameters log monitoring active participation flags for parades.' },
+      'badges': { title: 'Badges Earned Hub', desc: 'Proficiency task completions index tracking structural individual development tokens.' },
+      'awards': { title: 'Awards Registry', desc: 'Special merit distinctions, honors records, and higher ranking status lists.' },
+      'money-book': { title: 'Money Book Logs', desc: 'Transparent group ledger balances, income logs, and expenditure entries tracking.' },
+      'library': { title: 'E Library Hub', desc: 'Download structural scout handbooks, documentation frameworks, and resources.' },
+      'albums': { title: 'Albums Gallery', desc: 'Archived photographic event tracking frameworks of major camping and group activities.' },
+      'about': { title: 'About Portal Info', desc: 'Organizational background history, administration settings metadata, and platform targets.' }
+    };
+
+    function switchTab(target) {
+      const keys = Object.keys(metaData);
+      
+      // Hide all content containers and clear sidebar styles
+      keys.forEach(k => {
+        document.getElementById('view-' + k).classList.add('hidden');
+        const btn = document.getElementById('tab-' + k);
+        btn.className = "w-full text-left py-2.5 px-3.5 rounded-lg font-medium text-sm transition-all flex items-center gap-3 text-slate-400 hover:bg-slate-800/60 hover:text-slate-200";
+        
+        // Remove conditional active badge markup from members button if inactive
+        if(k === 'members') {
+          btn.innerHTML = '<span class="flex items-center gap-3"><span>👥</span> Members</span><span class="text-[10px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded font-bold">Active</span>';
+        }
+      });
+
+      // Show selected panel section element
+      document.getElementById('view-' + target).classList.remove('hidden');
+      
+      // Apply exact high-contrast active color styling to chosen sidebar selector link
+      const activeBtn = document.getElementById('tab-' + target);
+      if(target === 'members') {
+        activeBtn.className = "w-full text-left py-2.5 px-3.5 rounded-lg font-medium text-sm transition-all flex items-center justify-between bg-green-600 text-white shadow-md shadow-green-900/20";
+        activeBtn.innerHTML = '<span class="flex items-center gap-3"><span>👥</span> Members</span><span class="text-[10px] bg-green-800 text-green-200 px-1.5 py-0.5 rounded font-bold">Active</span>';
+      } else {
+        activeBtn.className = "w-full text-left py-2.5 px-3.5 rounded-lg font-medium text-sm transition-all flex items-center gap-3 bg-green-600 text-white shadow-md shadow-green-900/20";
+      }
+
+      // Update Header Metadata texts on the fly
+      document.getElementById('page-title').innerText = metaData[target].title;
+      document.getElementById('page-description').innerText = metaData[target].desc;
+    }
+  </script>
+</body>
+</html>
