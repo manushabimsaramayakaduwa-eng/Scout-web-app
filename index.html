@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>51st Colombo Scout Troop</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; }
+        input, select, button { width: 100%; padding: 10px; margin: 5px 0 15px 0; }
+        button { background: #4A154B; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>51st Colombo Scout Troop Register</h2>
+    
+    <form id="scoutForm">
+        <input type="text" id="name" placeholder="Scout Full Name" required>
+        <input type="text" id="scoutId" placeholder="Scout ID (e.g., 51C-102)" required>
+        <select id="patrol">
+            <option>Eagle Patrol</option>
+            <option>Lion Patrol</option>
+        </select>
+        <button type="submit">Add Scout</button>
+    </form>
+
+    <ul id="scoutList"></ul>
+
+    <script>
+        // PASTE YOUR SUPABASE KEYS HERE
+        const SUPABASE_URL = "YOUR_SUPABASE_URL_HERE";
+        const SUPABASE_KEY = "YOUR_SUPABASE_ANON_KEY_HERE";
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const form = document.getElementById('scoutForm');
+        const list = document.getElementById('scoutList');
+
+        // Load Data
+        async function loadScouts() {
+            list.innerHTML = '';
+            const { data } = await supabase.from('scouts').select('*');
+            data.forEach(s => {
+                const li = document.createElement('li');
+                li.textContent = `${s.scout_id} - ${s.full_name} (${s.patrol_name})`;
+                list.appendChild(li);
+            });
+        }
+
+        // Save Data
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            await supabase.from('scouts').insert([{
+                full_name: document.getElementById('name').value,
+                scout_id: document.getElementById('scoutId').value,
+                patrol_name: document.getElementById('patrol').value
+            }]);
+            form.reset();
+            loadScouts();
+        });
+
+        loadScouts();
+    </script>
+</body>
+          </html>
